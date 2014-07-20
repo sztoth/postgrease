@@ -105,7 +105,7 @@ function query(sql, params) {
 
   pg.connect(module.config, function(err, client, done) {
     if(err) {
-      console.log('Postgrease ' + err);
+      console.error('Postgrease ' + err);
       deferred.reject(err);
     } else {
       // If no params passed
@@ -113,7 +113,7 @@ function query(sql, params) {
         client.query(sql, function(error, result) {
           if(error) {
             done();
-            console.log('Postgrease ' + err);
+            console.error('Postgrease ' + err);
             deferred.reject(err);
           } else {
             var res = result.rows;
@@ -125,7 +125,7 @@ function query(sql, params) {
         client.query(sql, p, function(error, result) {
           if(error) {
             done();
-            console.log('Postgrease ' + err);
+            console.error('Postgrease ' + err);
             deferred.reject(err);
           } else {
             var res = result.rows;
