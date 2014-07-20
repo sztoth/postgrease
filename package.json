@@ -18,7 +18,7 @@
   "author": "Duncan Smith",
   "license": "MIT",
   "dependencies": {
-    "q": "~0.9.7",
-    "pg": "~2.8.3"
+    "q": "~1.0.1",
+    "pg": "~3.3.0"
   }
 }

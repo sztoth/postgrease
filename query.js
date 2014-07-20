@@ -105,14 +105,14 @@ function query(sql, params) {
 
   pg.connect(module.config, function(err, client, done) {
     if(err) {
-      console.error(err);
+      deferred.reject(new Error(err));
     }
 
     // If no params passed
     if(p.length < 1) {
       client.query(sql, function(error, result) {
         if(error) {
-          console.error('ONOEZ: ', error)
+          deferred.reject(new Error(err));
         }
         var res = result.rows;
         done();
@@ -121,7 +121,7 @@ function query(sql, params) {
     } else {
       client.query(sql, p, function(error, result) {
         if(error) {
-          console.error('ONOEZ: ', error)
+          deferred.reject(new Error(err));
         }
         var res = result.rows;
         done();
