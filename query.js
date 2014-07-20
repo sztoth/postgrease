@@ -113,8 +113,8 @@ function query(sql, params) {
         client.query(sql, function(error, result) {
           if(error) {
             done();
-            console.error('Postgrease ', err);
-            deferred.reject(err);
+            console.error('Postgrease ', error);
+            deferred.reject(error);
           } else {
             var res = result.rows;
             done();
@@ -125,8 +125,8 @@ function query(sql, params) {
         client.query(sql, p, function(error, result) {
           if(error) {
             done();
-            console.error('Postgrease ', err);
-            deferred.reject(err);
+            console.error('Postgrease ', error);
+            deferred.reject(error);
           } else {
             var res = result.rows;
             done();
