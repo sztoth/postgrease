@@ -106,32 +106,34 @@ function query(sql, params) {
   pg.connect(module.config, function(err, client, done) {
     if(err) {
       console.log('Postgrease ' + err);
-      deferred.reject(new Error(err));
-    }
-
-    // If no params passed
-    if(p.length < 1) {
-      client.query(sql, function(error, result) {
-        if(error) {
-          done();
-          console.log('Postgrease ' + err);
-          deferred.reject(new Error(err));
-        }
-        var res = result.rows;
-        done();
-        deferred.resolve(res);
-      });
+      deferred.reject(err);
     } else {
-      client.query(sql, p, function(error, result) {
-        if(error) {
-          done();
-          console.log('Postgrease ' + err);
-          deferred.reject(new Error(err));
-        }
-        var res = result.rows;
-        done();
-        deferred.resolve(res);
-      });
+      // If no params passed
+      if(p.length < 1) {
+        client.query(sql, function(error, result) {
+          if(error) {
+            done();
+            console.log('Postgrease ' + err);
+            deferred.reject(err);
+          } else {
+            var res = result.rows;
+            done();
+            deferred.resolve(res);
+          }
+        });
+      } else {
+        client.query(sql, p, function(error, result) {
+          if(error) {
+            done();
+            console.log('Postgrease ' + err);
+            deferred.reject(err);
+          } else {
+            var res = result.rows;
+            done();
+            deferred.resolve(res);
+          }
+        });
+      }
     }
   });
 
